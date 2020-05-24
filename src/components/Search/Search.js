@@ -2,18 +2,23 @@ import React, { useContext, useState } from 'react'
 import { FormGroup } from 'react-bootstrap'
 
 import { AlertContext } from '../../context/alert/AlertContext'
+import { GithubContext } from '../../context/github/GithubContext'
 
 const Search = () => {
-  const { show } = useContext(AlertContext)
+  const alert = useContext(AlertContext)
   const [value, setValue] = useState('')
+  const github = useContext(GithubContext)
 
   const onSubmit = event => {
     if (event.key !== 'Enter') return
 
+    github.clearUsers()
+
     if(value.trim()) {
-      console.log('Make request with:', value)
+      alert.hide()
+      github.search(value.trim())
     } else {
-      show('Enter user data!')
+      alert.show('Enter user data!')
     }
   }
 

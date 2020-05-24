@@ -4,12 +4,12 @@ import { Card, Image } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
-const Cardjs = () => (
+const Cardjs = ({user}) => (
   <Card>
-    <Image src='' className='card-img-top'/>
+    <Image src={user.avatar_url} alt={user.login} className='card-img-top'/>
     <Card.Body>
-      <Card.Title>Vsezol</Card.Title>
-      <Link to={`/profile/vsezol`} className='btn btn-primary'>Open</Link>
+      <Card.Title>{user.login}</Card.Title>
+      <Link to={`/profile/${user.login}`} className='btn btn-primary'>Open</Link>
     </Card.Body>
   </Card>
 )

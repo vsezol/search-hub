@@ -1,19 +1,25 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Search from '../../components/Search/Search'
 import Cardjs from '../../components/Cardjs/Cardjs'
 import { Row, Col } from 'react-bootstrap'
+import { GithubContext } from '../../context/github/GithubContext'
 
 const Main = () => {
-  const cards = new Array(15).fill('').map((_, i) => i)
+  const { loading, users } = useContext(GithubContext)
+
   return (
     <>
       <Search />
       <Row>
-        {cards.map((card, index) => (
-          <Col sm={4} key={index} className='mb-4'>
-            <Cardjs />
-          </Col>
-        ))}
+        {loading ? (
+          <p className='text-center'>Загрузка...</p>
+        ) : (
+          users.map(user => (
+            <Col sm={4} key={user.id} className='mb-4'>
+              <Cardjs user={user} />
+            </Col>
+          ))
+        )}
       </Row>
     </>
   )
