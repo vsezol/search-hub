@@ -1,1 +1,1 @@
-#serach [hub]
+#search [hub]
